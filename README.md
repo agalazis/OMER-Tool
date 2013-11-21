@@ -1,7 +1,7 @@
 OMER-Tool
 =========
 
-OMER tool (Open Menu easy review tool for developers who want to find out if the data are suitable for their projects)
+OMER tool (Open Menu Easy Review tool for developers who want to find out if the data are suitable for their projects)
 
 The tool
 =========
