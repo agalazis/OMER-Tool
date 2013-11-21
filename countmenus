@@ -1,0 +1,6 @@
+#!/bin/bash
+#get the number of the files in the ./harvestedmenus directory 
+#minus the dot file of the directory itself
+let "count = $(ls -1 ./harvestedmenus | wc -l) - 1"
+echo $count
+

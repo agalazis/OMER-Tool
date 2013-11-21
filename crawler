@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#download a specific page(argument 2) of a city(argument 1) using wget and parse it to find identifiers of xml files for restaurant menus
+function getpage(){
+wget  "http://openmenu.com/search/cityguide.php?page=${2}&${1}" -O - | grep -o -E 'href="restaurant([^"#]+)"' | cut -d'"' -f2 | cut -c 12-
+}
+
+#get list of cities  for a country by downloading its page using curl and parsing it accordingly
+function getlist(){
+regex="'""href=\"([^\"#]+)&ct=${1}\"""'";
+eval "curl \"http://openmenu.com/search/cities.php\" | grep -o -E ${regex} | cut -d'\"' -f2 | cut -c 15-"
+}
+
+#for each country find all its cities and for each city all its restaurant menu ids
+#andsave them to the crawledmenus.crawl file
+#finally clean duplicates and save the output to crawledmenus.crawl.cleaned
+for COUNTRY in "$@"
+   do
+      getlist "$COUNTRY" | while read CITY; do
+            i=1;
+            reaurantsforcity=$(getpage "$CITY" "$i");
+            while [ -n "$reaurantsforcity" ]
+               do
+                  echo "$reaurantsforcity"  >>  crawledmenus.crawl
+                  let i=i+1;
+                  echo "$i" >> log;
+                  reaurantsforcity=$(getpage "$CITY" "$i");
+               done
+         done
+   done
+tac crawledmenus.crawl | sort -k1,1 -r -u >crawledmenus.crawl.cleaned
