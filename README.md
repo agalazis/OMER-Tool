@@ -20,7 +20,7 @@ The crawler accepts countries as arguments ad finds the links of open menus(from
 Step 2:The harvester
 =============
 
-When you are done with the crowler you can rub the harvester using:
+When you are done with the crawler you can run the harvester using:
 
 ./harvester 
 
