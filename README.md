@@ -29,5 +29,5 @@ The harvester dowloads all the menus in the ./harvestedmenus directory according
 
 Step 3:The menu counter
 =============
-I you want to count the menus downloaded you may use the counter tool:
+If you want to count the menus downloaded you may use the counter tool:
 ./countmenus
